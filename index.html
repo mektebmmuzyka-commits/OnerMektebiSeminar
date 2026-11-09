@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>«Өнер мектебі» — Мемлекеттік коммуналдық қазыналық кәсіпорны</title>
+<link rel="icon" href="img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ================= БАЗА ================= */
+:root{
+  --primary:#1e3a8a; --primary-hover:#1e40af; --primary-soft:rgba(30,58,138,.1); --accent:#d4af37;
+  --bg:#f0f7ff; --surface:#ffffff; --surface-2:#e0f2fe;
+  --text:#0f172a; --text-muted:#64748b; --border:#bae6fd;
+  --radius:20px; --radius-sm:14px;
+  --shadow-sm:0 2px 4px rgba(30,58,138,.05); --shadow:0 10px 30px -10px rgba(30,58,138,.12); --shadow-lg:0 30px 60px -15px rgba(30,58,138,.2);
+  --container:1160px; --header-h:84px;
+}
+[data-theme="dark"]{
+  --primary:#3b82f6; --primary-hover:#60a5fa; --primary-soft:rgba(59,130,246,.15); --accent:#fbbf24;
+  --bg:#0f172a; --surface:#1e293b; --surface-2:#334155;
+  --text:#f8fafc; --text-muted:#94a3b8; --border:#475569;
+  --shadow-sm:0 2px 4px rgba(0,0,0,.3); --shadow:0 10px 30px -10px rgba(0,0,0,.5); --shadow-lg:0 30px 60px -15px rgba(0,0,0,.7);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s ease,color .3s ease;
+  overflow-x:hidden;
+}
+
+/* ================= ФОН ================= */
+body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('img/background.jpeg'); background-size: cover; background-position: center; background-attachment: fixed;
+    opacity: 0.2; z-index: -1; pointer-events: none; transition: opacity .3s ease, filter .3s ease;
+    filter: hue-rotate(180deg);
+}
+[data-theme="dark"] body::before { opacity: 0.05; filter: brightness(0.2) hue-rotate(180deg); }
+
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:24px;}
+
+/* ================= ХЕДЕР ================= */
+.header{position:sticky;top:0;z-index:100;height:var(--header-h);background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:all .3s ease;}
+.header__inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.logo{display:flex;align-items:center;gap:16px;transition:transform .2s ease;}
+.logo:hover{transform:translateY(-1px);}
+.logo__img{width:60px;height:60px;object-fit:contain;border-radius:50%;flex-shrink:0;filter:drop-shadow(0 4px 8px rgba(30,58,138,0.25));}
+.logo__text{display:flex;flex-direction:column;justify-content:center;}
+.logo__text strong{font-size:18px;font-weight:800;color:var(--text);letter-spacing:-.02em;line-height:1.2;}
+.logo__text span{font-size:12px;font-weight:600;color:var(--text-muted);line-height:1.2;margin-top:4px;}
+.nav{display:flex;align-items:center;gap:8px}
+.nav__link{padding:10px 20px;border-radius:12px;font-size:15px;font-weight:600;color:var(--text-muted);transition:all .2s ease;}
+.nav__link:hover, .nav__link.active{color:var(--primary);background:var(--primary-soft);}
+.header__actions{display:flex;align-items:center;gap:12px}
+.icon-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);transition:all .2s ease;}
+.icon-btn:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-soft);}
+.icon-btn svg{width:20px;height:20px}
+.burger{display:none;width:44px;height:44px;border-radius:14px;border:1px solid var(--border);background:var(--surface);place-items:center;transition:all .2s ease;}
+.burger:hover{background:var(--surface-2);}
+.burger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;transition:.3s ease}
+.burger span+span{margin-top:5px}
+.burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.is-open span:nth-child(2){opacity:0}
+.burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ================= HERO ================= */
+.hero{position:relative;overflow:hidden;padding:80px 0 70px;text-align:center;}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 500px at 50% -20%,rgba(212,175,55,.15),transparent 80%);}
+.hero__inner{position:relative;max-width:800px;margin:0 auto;}
+.hero h1{font-size:clamp(28px,4vw,48px);line-height:1.15;letter-spacing:-.04em;font-weight:800;margin-bottom:20px;}
+.grad{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;}
+.hero__text{font-size:18px;color:var(--text-muted);max-width:640px;margin:0 auto;line-height:1.7;}
+
+/* ================= СЕКЦИИ ================= */
+.section{padding:20px 0 80px;}
+.section__head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:32px;}
+.section__title{font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--text);}
+.section__count{font-size:15px;color:var(--primary);font-weight:700;background:var(--primary-soft);padding:6px 14px;border-radius:999px;}
+
+/* ================= ПЕДАГОГТЕР ================= */
+.teachers{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px;}
+.teacher{
+  background:color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;box-shadow:var(--shadow-sm);
+  display:flex;flex-direction:column;
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.teacher:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--primary);}
+
+.teacher__head{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.avatar{width:60px;height:60px;border-radius:18px;flex-shrink:0;display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff;letter-spacing:-.02em;box-shadow:0 8px 20px -6px rgba(30,58,138,.35);transition:transform .3s ease;}
+.teacher:hover .avatar{transform:scale(1.05) rotate(-3deg);}
+.a1{background:linear-gradient(135deg,var(--primary),var(--accent))}
+.a2{background:linear-gradient(135deg,#0f766e,#14b8a6)}
+.a3{background:linear-gradient(135deg,#7c3aed,#a855f7)}
+
+.teacher__name{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.3;}
+.teacher__subject{font-size:14px;color:var(--text-muted);font-weight:500;margin-top:4px;}
+
+.lesson-topic{background:var(--surface-2);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin-bottom:20px;font-size:14.5px;font-weight:600;color:var(--text);line-height:1.5;}
+.lesson-topic span{display:block;font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.chip{font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:10px;background:var(--primary-soft);color:var(--primary);}
+
+/* ================= КНОПКИ ================= */
+.teacher__files{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.teacher__files .download-btn--wide{grid-column:1 / -1;}
+
+.download-btn{
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  padding:14px 16px;border-radius:var(--radius-sm);
+  border:1px solid var(--border);background:var(--surface);
+  transition:all .2s ease;min-width:0;
+}
+.download-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.download-btn__row{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14.5px;}
+.download-btn svg{width:18px;height:18px;flex-shrink:0;transition:transform .2s ease;}
+.download-btn:hover svg{transform:translateY(-2px);}
+.download-btn__sub{font-size:12px;color:var(--text-muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+
+.download-btn--pdf{color:#dc2626;border-color:color-mix(in srgb,#dc2626 20%,var(--border));}
+.download-btn--pdf:hover{background:rgba(220,38,38,.08);border-color:#dc2626;}
+.download-btn--word{color:#2563eb;border-color:color-mix(in srgb,#2563eb 20%,var(--border));}
+.download-btn--word:hover{background:rgba(37,99,235,.08);border-color:#2563eb;}
+.download-btn--ppt{color:#ea580c;border-color:color-mix(in srgb,#ea580c 20%,var(--border));}
+.download-btn--ppt:hover{background:rgba(234,88,12,.08);border-color:#ea580c;}
+
+/* ================= ФУТЕР ================= */
+.footer{border-top:1px solid var(--border);padding:40px 0;background:var(--surface);}
+.footer__inner{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;font-size:14px;font-weight:500;color:var(--text-muted);}
+
+/* ================= АДАПТИВ ================= */
+@media (max-width:980px){
+  .teachers{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}
+}
+@media (max-width:768px){
+  .container{padding-inline:20px;}
+  .nav{position:fixed;top:var(--header-h);left:0;right:0;flex-direction:column;align-items:stretch;gap:8px;background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px 24px;box-shadow:var(--shadow-lg);transform:translateY(-150%);transition:transform .3s cubic-bezier(.4,0,.2,1);visibility:hidden;}
+  .nav.is-open{transform:translateY(0);visibility:visible;}
+  .nav__link{padding:14px 18px;border-radius:12px;font-size:16px;}
+  .burger{display:grid;}
+  .hero{padding:50px 0 40px;}
+  .section{padding:10px 0 60px;}
+  .teachers{grid-template-columns:1fr;}
+  .logo__img{width:48px;height:48px;}
+  .logo__text strong{font-size:15px;}
+  .logo__text span{font-size:11px;}
+}
+@media (max-width:420px){
+  .teacher__files{grid-template-columns:1fr;}
+  .download-btn{flex-direction:row;align-items:center;justify-content:space-between;padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="#" class="logo">
+      <img src="img/logo.png" alt="«Өнер мектебі»" class="logo__img">
+      <div class="logo__text">
+        <strong>«Өнер мектебі»</strong>
+        <span>мемлекеттік коммуналдық қазыналық кәсіпорны</span>
+      </div>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#teachers" class="nav__link active">Педагогтер</a>
+      <a href="https://mektebmmuzyka-commits.github.io/MuzMektepKeriBailanys/" class="nav__link">Кері байланыс</a>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Сменить тему">
+        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero__inner">
+    <h1>Өнер әлеміне қош келдіңіз!<br><span class="grad">Біздің мектеп</span></h1>
+    <p class="hero__text">Мұнда музыка, театр және бейнелеу өнері тоғысады. Біз әр баланың шығармашылық қабілетін ашып, өз талантын табуға көмектесеміз.</p>
+  </div>
+</section>
+
+<section class="section" id="teachers">
+  <div class="container">
+    <div class="section__head">
+      <h2 class="section__title">Біздің педагогтеріміз</h2>
+      <div class="section__count" id="countLabel">3 педагог</div>
+    </div>
+
+    <div class="teachers" id="teachersGrid">
+
+      <!-- 1. Примкулова А.К. -->
+      <article class="teacher">
+        <div class="teacher__head">
+          <div class="avatar a1">ПА</div>
+          <div>
+            <div class="teacher__name">Примкулова А. К.</div>
+            <div class="teacher__subject">Қосымша білім беру педагогі</div>
+          </div>
+        </div>
+        <div class="lesson-topic">
+          <span>Семинар тақырыбы:</span>
+          «Үздіксіз білім беруде балаларға қосымша білім беруді дамыту: жаңа мүмкіндіктер және инновациялар»
+        </div>
+        <div class="chips">
+          <span class="chip">Аудандық семинар</span>
+          <span class="chip">2026-2027 о.ж.</span>
+        </div>
+        <div class="teacher__files">
+          <a class="download-btn download-btn--pdf download-btn--wide" href="doks/AksholpanWord.pdf" target="_blank" rel="noopener">
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>ҚМЖ (PDF) — қарау</span>
+            <span class="download-btn__sub">Ашу · .pdf</span>
+          </a>
+          <a class="download-btn download-btn--word download-btn--wide" href="doks/Aksholpan.docx" download>
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>ҚМЖ (Word) — өңдеу</span>
+            <span class="download-btn__sub">Скачать · .docx</span>
+          </a>
+          <a class="download-btn download-btn--pdf" href="doks/Aksholpan.pdf" target="_blank" rel="noopener">
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M2 12h4M6 12v4M10 12v4M14 12v4M18 12v4"/></svg>Презентация (PDF)</span>
+            <span class="download-btn__sub">Ашу · .pdf</span>
+          </a>
+          <a class="download-btn download-btn--ppt" href="doks/Aksholpan.pptx" download>
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>Презентация (PPTX)</span>
+            <span class="download-btn__sub">Скачать · .pptx</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- 2. Елеубаева Р.С. -->
+      <article class="teacher">
+        <div class="teacher__head">
+          <div class="avatar a2">ЕР</div>
+          <div>
+            <div class="teacher__name">Елеубаева Рымтай Серікқызы</div>
+            <div class="teacher__subject">Актерлік шеберлік педагогі</div>
+          </div>
+        </div>
+        <div class="lesson-topic">
+          <span>Сабақтың тақырыбы:</span>
+          «Сахнадағы сенім мен шығармашылық еркіндік; жас актерді қалыптастырудың тиімді тренингтері»
+        </div>
+        <div class="chips">
+          <span class="chip">III курс</span>
+          <span class="chip">Ашық сабақ</span>
+        </div>
+        <div class="teacher__files">
+          <a class="download-btn download-btn--pdf download-btn--wide" href="doks/NazymWord.pdf" target="_blank" rel="noopener">
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>ҚМЖ (PDF) — қарау</span>
+            <span class="download-btn__sub">Ашу · .pdf</span>
+          </a>
+          <a class="download-btn download-btn--word download-btn--wide" href="doks/Nazym.docx" download>
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>ҚМЖ (Word) — өңдеу</span>
+            <span class="download-btn__sub">Скачать · .docx</span>
+          </a>
+          <a class="download-btn download-btn--pdf" href="doks/Nazym.pdf" target="_blank" rel="noopener">
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M2 12h4M6 12v4M10 12v4M14 12v4M18 12v4"/></svg>Презентация (PDF)</span>
+            <span class="download-btn__sub">Ашу · .pdf</span>
+          </a>
+          <a class="download-btn download-btn--ppt" href="doks/Nazym.pptx" download>
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>Презентация (PPTX)</span>
+            <span class="download-btn__sub">Скачать · .pptx</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- 3. Төлепбаева Қ.А. -->
+      <article class="teacher">
+        <div class="teacher__head">
+          <div class="avatar a3">ТҚ</div>
+          <div>
+            <div class="teacher__name">Төлепбаева Құралай Айтмырзақызы</div>
+            <div class="teacher__subject">Қуыршақ театрының педагогі</div>
+          </div>
+        </div>
+        <div class="lesson-topic">
+          <span>Сабақтың тақырыбы:</span>
+          «Қуыршақ театрының бала қиялына әсері»
+        </div>
+        <div class="chips">
+          <span class="chip">Ашық сабақ</span>
+          <span class="chip">2026-2027 о.ж.</span>
+        </div>
+        <div class="teacher__files">
+          <a class="download-btn download-btn--pdf download-btn--wide" href="doks/KuralaiWord.pdf" target="_blank" rel="noopener">
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>ҚМЖ (PDF) — қарау</span>
+            <span class="download-btn__sub">Ашу · .pdf</span>
+          </a>
+          <a class="download-btn download-btn--word download-btn--wide" href="doks/Kuralai.docx" download>
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>ҚМЖ (Word) — өңдеу</span>
+            <span class="download-btn__sub">Скачать · .docx</span>
+          </a>
+          <a class="download-btn download-btn--pdf" href="doks/Kuralai.pdf" target="_blank" rel="noopener">
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M2 12h4M6 12v4M10 12v4M14 12v4M18 12v4"/></svg>Презентация (PDF)</span>
+            <span class="download-btn__sub">Ашу · .pdf</span>
+          </a>
+          <a class="download-btn download-btn--ppt" href="doks/Kuralai.pptx" download>
+            <span class="download-btn__row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>Презентация (PPTX)</span>
+            <span class="download-btn__sub">Скачать · .pptx</span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="contacts">
+  <div class="container footer__inner">
+    <span>© 2026 «Өнер мектебі» мемлекеттік коммуналдық қазыналық кәсіпорны</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- Мобильное меню ---------- */
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav');
+burger.addEventListener('click', () => {
+  const open = nav.classList.toggle('is-open');
+  burger.classList.toggle('is-open', open);
+  burger.setAttribute('aria-expanded', open);
+});
+nav.querySelectorAll('.nav__link').forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('is-open');
+    burger.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* ---------- Тема ---------- */
+const themeToggle = document.getElementById('themeToggle');
+const iconMoon = document.getElementById('iconMoon');
+const iconSun = document.getElementById('iconSun');
+function setTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  iconMoon.style.display = mode === 'dark' ? 'none' : 'block';
+  iconSun.style.display  = mode === 'dark' ? 'block' : 'none';
+  localStorage.setItem('theme', mode);
+}
+if (localStorage.getItem('theme') === 'dark') setTheme('dark');
+themeToggle.addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  setTheme(cur === 'dark' ? 'light' : 'dark');
+});
+</script>
+</body>
+</html>
